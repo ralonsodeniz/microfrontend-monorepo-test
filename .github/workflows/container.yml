@@ -37,5 +37,9 @@ jobs:
         run: yarn build
 
       - uses: shinyinc/action-aws-cli@v1.2
+
       - name: S3 sync
         run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+
+      - name: cloudfront cache invalidation
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
