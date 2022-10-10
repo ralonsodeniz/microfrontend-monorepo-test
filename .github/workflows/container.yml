@@ -23,12 +23,13 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js 18
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 18.x
+          cache: "yarn"
 
       - name: configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -43,8 +44,8 @@ jobs:
       - name: build
         run: yarn build
 
-      - name: S3 sync
-        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
+      - name: S3 sync and delete old files
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest --delete
 
       - name: cloudfront cache invalidation
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
