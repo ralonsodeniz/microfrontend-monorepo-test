@@ -39,7 +39,7 @@ jobs:
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       - name: install
-        run: yarn
+        run: yarn install --no-lockfile
 
       - name: build
         run: yarn build
