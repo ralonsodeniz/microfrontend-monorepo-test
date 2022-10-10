@@ -4,12 +4,12 @@ import { createMemoryHistory, createBrowserHistory } from "history";
 
 import App from "./App";
 
-const localDevContainer = document.querySelector("#dev-marketing-root");
+const localDevContainer = document.querySelector("#dev-auth-root");
 
 const isLocalDevEnv =
   process.env.NODE_ENV === "development" && localDevContainer;
 
-const renderMarketing = (element, hostAPI) => {
+const renderAuth = (element, hostAPI) => {
   const { onNavigate, getInitialPath } = hostAPI;
   const history = isLocalDevEnv
     ? createBrowserHistory()
@@ -32,6 +32,6 @@ const renderMarketing = (element, hostAPI) => {
   };
 };
 
-if (isLocalDevEnv) renderMarketing(localDevContainer, {});
+if (isLocalDevEnv) renderAuth(localDevContainer, {});
 
-export { renderMarketing };
+export { renderAuth };
