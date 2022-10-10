@@ -1,22 +1,21 @@
-name: deploy-container
+name: deploy-marketing
 
 on:
   push:
     branches:
       - master
     paths:
-      - "container/**"
+      - "marketing/**"
   workflow_dispatch:
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_DEFAULT_REGION: eu-west-3
-  PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
 defaults:
   run:
-    working-directory: container
+    working-directory: marketing
 
 jobs:
   deploy:
@@ -46,7 +45,7 @@ jobs:
         run: yarn build
 
       - name: S3 sync and delete old files
-        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest --delete
+        run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/marketing/latest --delete
 
       - name: cloudfront cache invalidation
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/latest/index.html"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/marketing/latest/remoteEntry.js"
