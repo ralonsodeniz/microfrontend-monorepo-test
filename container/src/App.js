@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { StylesProvider, createGenerateClassName } from "@material-ui/core";
 
-import Header from "./components/Header";
-import Routes from "./Routes";
+import Layout from "./Layout";
 
 const generateClassname = createGenerateClassName({
   productionPrefix: "co",
@@ -12,8 +11,7 @@ const generateClassname = createGenerateClassName({
 const App = () => (
   <StylesProvider generateClassName={generateClassname}>
     <BrowserRouter>
-      <Header />
-      <Routes />
+      <Layout />
     </BrowserRouter>
   </StylesProvider>
 );

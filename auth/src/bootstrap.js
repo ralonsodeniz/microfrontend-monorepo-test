@@ -10,7 +10,7 @@ const isLocalDevEnv =
   process.env.NODE_ENV === "development" && localDevContainer;
 
 const renderAuth = (element, hostAPI) => {
-  const { onNavigate, getInitialPath } = hostAPI;
+  const { onNavigate, getInitialPath, onSignIn } = hostAPI;
   const history = isLocalDevEnv
     ? createBrowserHistory()
     : createMemoryHistory({
@@ -18,7 +18,7 @@ const renderAuth = (element, hostAPI) => {
       });
   if (onNavigate) history.listen(onNavigate);
 
-  ReactDOM.render(<App history={history} />, element);
+  ReactDOM.render(<App history={history} onSignIn={onSignIn} />, element);
 
   return {
     onParentNavigate: ({ pathname: nextPathname }) => {
