@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "start": "concurrently 'cd ./marketing && yarn start' 'cd ./container && yarn start' 'cd ./auth && yarn start'"
+    "start": "concurrently 'cd ./marketing && yarn start' 'cd ./container && yarn start' 'cd ./auth && yarn start' 'cd ./dashboard && yarn start'"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",

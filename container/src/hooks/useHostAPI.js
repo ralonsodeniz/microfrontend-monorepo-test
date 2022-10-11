@@ -25,7 +25,7 @@ export const useHostAPI = () => {
       },
       onSignIn: () => {
         setIsSignedIn(true);
-        history.push("/");
+        history.push("/dashboard");
       },
     }),
     [history]

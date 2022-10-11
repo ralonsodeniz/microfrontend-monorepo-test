@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <>
       <Header isSignedIn={isSignedIn} onSignOut={onSignOut} />
-      <Routes hostAPI={hostAPI} />
+      <Routes hostAPI={hostAPI} isSignedIn={isSignedIn} />
     </>
   );
 };
